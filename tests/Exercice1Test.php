@@ -121,4 +121,23 @@ class Exercice1Test extends TestCase
       ['0', '', '0']
     ]));
   }
+
+
+  /** @test */
+  public function should_return_0_when_0_make_diagonal_line()
+  {
+    $exo1 = new Exercice1;
+    // X wins left top to right bottom line
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['0', 'X', 'X'],
+      ['0', '0', ''],
+      ['X', 'X', '0']
+    ]));
+    // X wins left bottom to right top line
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['X', 'X', '0'],
+      ['0', '0', ''],
+      ['0', 'X', 'X']
+    ]));
+  }
 }

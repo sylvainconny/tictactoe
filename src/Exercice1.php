@@ -16,19 +16,21 @@ class Exercice1
       }
     }
     for ($v = 0; $v < 3; $v++) {
-      if ($board[0][$v] == 'X' && $board[1][$v] == 'X' && $board[2][$v] == 'X') {
-        return 'X';
-      }
-      if ($board[0][$v] == '0' && $board[1][$v] == '0' && $board[2][$v] == '0') {
-        return '0';
-      }
+      $line = '';
+      for ($h = 0; $h < 3; $h++) $line .= $board[$h][$v];
+      if (strcmp($line, str_repeat('X', 3)) == 0) return 'X';
+      if (strcmp($line, str_repeat('0', 3)) == 0) return '0';
     }
-    if ($board[0][0] == 'X' && $board[1][1] == 'X' && $board[2][2] == 'X') {
-      return 'X';
+    $diagonaleTL2BR = '';
+    $diagonaleBL2TR = '';
+    for ($d = 0; $d < 3; $d++) {
+      $diagonaleTL2BR .= $board[$d][$d];
+      $diagonaleBL2TR .= $board[$d][2 - $d];
     }
-    if ($board[0][2] == 'X' && $board[1][1] == 'X' && $board[2][0] == 'X') {
-      return 'X';
-    }
-    return '';
+    if (strcmp($diagonaleTL2BR, str_repeat('X', 3)) == 0) return 'X';
+    if (strcmp($diagonaleBL2TR, str_repeat('X', 3)) == 0) return 'X';
+    if (strcmp($diagonaleTL2BR, str_repeat('0', 3)) == 0) return '0';
+    if (strcmp($diagonaleBL2TR, str_repeat('0', 3)) == 0) return '0';
+    return 'Tie';
   }
 }
