@@ -11,6 +11,11 @@ class Exercice1
         return 'X';
       }
     }
+    for ($v = 0; $v < 3; $v++) {
+      if ($board[0][$v] == 'X' && $board[1][$v] == 'X' && $board[2][$v] == 'X') {
+        return 'X';
+      }
+    }
     return '';
   }
 }
