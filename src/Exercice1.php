@@ -7,8 +7,12 @@ class Exercice1
   public function andTheWinnerIs(array $board): string
   {
     for ($h = 0; $h < 3; $h++) {
-      if ($board[$h][0] == 'X' && $board[$h][1] == 'X' && $board[$h][2] == 'X') {
+      $countValues = array_count_values($board[$h]);
+      if (array_key_exists('X', $countValues) && $countValues['X'] == count($board[$h])) {
         return 'X';
+      }
+      if (array_key_exists('0', $countValues) && $countValues['0'] == count($board[$h])) {
+        return '0';
       }
     }
     for ($v = 0; $v < 3; $v++) {
