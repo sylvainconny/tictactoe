@@ -2,16 +2,32 @@
 
 namespace App;
 
-class Exercice1
+use Exception;
+
+class TicTacToe
 {
 
-  private $winner = '';
+  private $winner;
 
-  public function andTheWinnerIs(array $board): string
+  public function andTheWinnerIs($board): string
   {
-    $this->hasPlayerWon($board, ['X', '0']);
+    // init winner parameter
+    $this->winner = '';
+    if (is_array($board)) {
+      $matrixBoard = $board;
+    }
+    if (is_string($board)) {
+      $matrixBoard = array_chunk(str_split($board, 1), sqrt(strlen($board)), false);
+    }
+    if (!isset($matrixBoard)) throw new Exception('No board to play');
+    if (count($matrixBoard) < 3) throw new Exception('Board should be 3x3 at least');
+    // set the winner parameter
+    $this->hasPlayerWon($matrixBoard, ['X', '0']);
+    // if the winner parameter has been filled
     if (strlen($this->winner)) return $this->winner;
-    if (!$this->gameDone($board)) return 'In progress';
+    // if the game is not done
+    if (!$this->gameDone($matrixBoard)) return 'In progress';
+    // if no winner and the game is done
     return 'Tie';
   }
 
