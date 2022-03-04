@@ -9,7 +9,7 @@ class Exercice2
     $exo1 = new Exercice1;
     if (is_array($board)) return $exo1->andTheWinnerIs($board);
     if (is_string($board)) {
-      $matrixBoard = array_chunk(str_split($board, 1), 3, false);
+      $matrixBoard = array_chunk(str_split($board, 1), sqrt(strlen($board)), false);
       return $exo1->andTheWinnerIs($matrixBoard);
     }
   }
