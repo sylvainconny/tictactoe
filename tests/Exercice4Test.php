@@ -21,6 +21,19 @@ class Exercice4Test extends TestCase
       ['0', 'X']
     ]);
   }
+  /** @test */
+  public function should_not_accept_wrong_characters()
+  {
+    $ttt = new TicTacToe;
+    // all the calls should throw exceptions
+    $this->expectException('Exception');
+    $ttt->andTheWinnerIs('XBX00X0X0');
+    $ttt->andTheWinnerIs([
+      ['X', '', 'O'],
+      ['X', ' ', 'O'],
+      ['0', ' ', 'X'],
+    ]);
+  }
 
   /** @test */
   public function should_send_inprogress_if_game_not_done()

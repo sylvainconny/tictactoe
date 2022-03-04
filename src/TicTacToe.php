@@ -9,7 +9,7 @@ class TicTacToe
 
   private $winner;
 
-  public function andTheWinnerIs($board): string
+  public function andTheWinnerIs($board, array $players = ['X', '0']): string
   {
     // init winner parameter
     $this->winner = '';
@@ -21,8 +21,9 @@ class TicTacToe
     }
     if (!isset($matrixBoard)) throw new Exception('No board to play');
     if (count($matrixBoard) < 3) throw new Exception('Board should be 3x3 at least');
+    if ($this->errorInBoard($matrixBoard, $players)) throw new Exception('Wrong character');
     // set the winner parameter
-    $this->hasPlayerWon($matrixBoard, ['X', '0']);
+    $this->hasPlayerWon($matrixBoard, $players);
     // if the winner parameter has been filled
     if (strlen($this->winner)) return $this->winner;
     // if the game is not done
@@ -39,6 +40,18 @@ class TicTacToe
       }
     }
     return true;
+  }
+
+  // find any wrong character in board
+  private function errorInBoard(array $board, array $players): bool
+  {
+    $goodCharacters = array_merge([' '], $players);
+    for ($i = 0; $i < count($board); $i++) {
+      for ($j = 0; $j < count($board[$i]); $j++) {
+        if (!in_array($board[$i][$j], $goodCharacters)) return true;
+      }
+    }
+    return false;
   }
 
   private function hasPlayerWon(array $board, array $players): void
