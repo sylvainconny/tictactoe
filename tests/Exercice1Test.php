@@ -85,16 +85,40 @@ class Exercice1Test extends TestCase
       ['X', 'X', ''],
     ]));
     // X wins second horizontal line
-    $this->assertSame('X', $exo1->andTheWinnerIs([
-      ['0', '0', 'X'],
-      ['X', 'X', 'X'],
-      ['0', '0', ''],
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['X', 'X', '0'],
+      ['0', '0', '0'],
+      ['X', 'X', ''],
     ]));
     // X wins last horizontal line
-    $this->assertSame('X', $exo1->andTheWinnerIs([
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['X', 'X', '0'],
+      ['X', 'X', ''],
+      ['0', '0', '0'],
+    ]));
+  }
+
+  /** @test */
+  public function should_return_0_when_0_make_vertical_line()
+  {
+    $exo1 = new Exercice1;
+    // X wins first vertical line
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['0', 'X', 'X'],
       ['0', '0', 'X'],
-      ['0', '0', ''],
-      ['X', 'X', 'X'],
+      ['0', 'X', '']
+    ]));
+    // X wins second vertical line
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['X', '0', 'X'],
+      ['X', '0', 'X'],
+      ['0', '0', '']
+    ]));
+    // X wins last vertical line
+    $this->assertSame('0', $exo1->andTheWinnerIs([
+      ['X', 'X', '0'],
+      ['X', 'X', '0'],
+      ['0', '', '0']
     ]));
   }
 }

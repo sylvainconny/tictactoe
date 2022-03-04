@@ -19,6 +19,9 @@ class Exercice1
       if ($board[0][$v] == 'X' && $board[1][$v] == 'X' && $board[2][$v] == 'X') {
         return 'X';
       }
+      if ($board[0][$v] == '0' && $board[1][$v] == '0' && $board[2][$v] == '0') {
+        return '0';
+      }
     }
     if ($board[0][0] == 'X' && $board[1][1] == 'X' && $board[2][2] == 'X') {
       return 'X';
