@@ -4,16 +4,17 @@ namespace App;
 
 class Exercice1
 {
+
+  private $winner = '';
+
   public function andTheWinnerIs(array $board): string
   {
-    // if x win in horizontal
-    if ($this->hasPlayerWon($board, 'X')) return 'X';
-    // if 0 win in horizontal
-    if ($this->hasPlayerWon($board, '0')) return '0';
+    $this->hasPlayerWon($board, ['X', '0']);
+    if (strlen($this->winner)) return $this->winner;
     return 'Tie';
   }
 
-  private function hasPlayerWon(array $board, string $player): bool
+  private function hasPlayerWon(array $board, array $players): void
   {
     // size of board
     $size = count($board);
@@ -25,13 +26,13 @@ class Exercice1
     for ($i = 0; $i < $size; $i++) {
       // HORIZONTAL
       $horizontal = implode('', $board[$i]);
-      if ($this->hasPlayerDrawALine($player, $size, $horizontal)) return true;
+      if ($this->hasPlayerDrawALine($players, $size, $horizontal)) return;
 
       // VERTICAL
       $vertical = '';
       for ($j = 0; $j < $size; $j++) $vertical .= $board[$j][$i];
       // compare line string with the expected string
-      if ($this->hasPlayerDrawALine($player, $size, $vertical)) return true;
+      if ($this->hasPlayerDrawALine($players, $size, $vertical)) return;
 
       // DIAGONAL
       // making diagonal strings
@@ -39,16 +40,21 @@ class Exercice1
       $diagonaleBL2TR .= $board[$i][$size - 1 - $i];
     }
     // compare top bottom diagonal string with the expected string
-    if ($this->hasPlayerDrawALine($player, $size, $diagonaleTL2BR)) return true;
+    if ($this->hasPlayerDrawALine($players, $size, $diagonaleTL2BR)) return;
     // compare bottom top diagonal string with the expected string
-    if ($this->hasPlayerDrawALine($player, $size, $diagonaleBL2TR)) return true;
-    return false;
+    if ($this->hasPlayerDrawALine($players, $size, $diagonaleBL2TR)) return;
   }
 
-  private function hasPlayerDrawALine(string $player, int $size, string $line)
+  private function hasPlayerDrawALine(array $players, int $size, string $line): bool
   {
     // expected line, X or 0 * board size
-    $expected = str_repeat($player, $size);
-    return strcmp($expected, $line) == 0;
+    foreach ($players as $player) {
+      $expected = str_repeat($player, $size);
+      if (strcmp($expected, $line) == 0) {
+        $this->winner = $player;
+        return true;
+      }
+    }
+    return false;
   }
 }
