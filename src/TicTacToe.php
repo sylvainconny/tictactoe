@@ -21,6 +21,7 @@ class TicTacToe
     }
     if (!isset($matrixBoard)) throw new Exception('No board to play');
     if (count($matrixBoard) < 3) throw new Exception('Board should be 3x3 at least');
+    // check no wrong characters
     if ($this->errorInBoard($matrixBoard, $players)) throw new Exception('Wrong character');
     // set the winner parameter
     $this->hasPlayerWon($matrixBoard, $players);
