@@ -6,7 +6,7 @@
 $ composer install
 ```
 
-## Tets
+## Tests
 
 ```bash
 $ ./vendor/bin/phpunit
