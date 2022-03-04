@@ -11,7 +11,18 @@ class Exercice1
   {
     $this->hasPlayerWon($board, ['X', '0']);
     if (strlen($this->winner)) return $this->winner;
+    if (!$this->gameDone($board)) return 'In progress';
     return 'Tie';
+  }
+
+  private function gameDone(array $board): bool
+  {
+    for ($i = 0; $i < count($board); $i++) {
+      for ($j = 0; $j < count($board[$i]); $j++) {
+        if ($board[$i][$j] == ' ') return false;
+      }
+    }
+    return true;
   }
 
   private function hasPlayerWon(array $board, array $players): void
