@@ -21,4 +21,5 @@ $ ./server.sh
 ```
 
 Se rendre sur http://localhost:8080
+
 http://localhost:8080?size=X (X est un nombre >= 3) pour changer la taille
